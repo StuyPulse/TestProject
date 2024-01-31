@@ -23,12 +23,41 @@ import static com.revrobotics.CANSparkMax.IdleMode;
 public interface Motors {
 
     /** Classes to store all of the values a motor needs */
+    public interface Amper {
+        CANSparkMaxConfig LIFT_MOTOR = new CANSparkMaxConfig(false, IdleMode.kBrake);
+        CANSparkMaxConfig SCORE_MOTOR = new CANSparkMaxConfig(false, IdleMode.kBrake);
+    }
+  
+    public interface Swerve {
+        public CANSparkMaxConfig DRIVE_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake);
+        public CANSparkMaxConfig TURN_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake);
+    }
 
+    public interface Intake {
+        CANSparkMaxConfig MOTOR_CONFIG = new CANSparkMaxConfig(false, IdleMode.kBrake);
+    }
+  
+    public interface Shooter {
+        CANSparkMaxConfig LEFT_SHOOTER = new CANSparkMaxConfig(false,IdleMode.kCoast);
+        CANSparkMaxConfig RIGHT_SHOOTER = new CANSparkMaxConfig(false,IdleMode.kCoast);      
+    }
+  
+    public interface Conveyor {
+        CANSparkMaxConfig GANDALF_MOTOR = new CANSparkMaxConfig(false, IdleMode.kBrake);
+        CANSparkMaxConfig SHOOTER_FEEDER_MOTOR = new CANSparkMaxConfig(false, IdleMode.kBrake);
+    }
+
+    public interface Climber {
+        CANSparkMaxConfig LEFT_MOTOR = new CANSparkMaxConfig(false, IdleMode.kBrake);
+        CANSparkMaxConfig RIGHT_MOTOR = new CANSparkMaxConfig(false, IdleMode.kBrake);
+    }
     public static class TalonSRXConfig {
         public final boolean INVERTED;
         public final NeutralMode NEUTRAL_MODE;
         public final int PEAK_CURRENT_LIMIT_AMPS;
         public final double OPEN_LOOP_RAMP_RATE;
+
+        
 
         public TalonSRXConfig(
                 boolean inverted,
