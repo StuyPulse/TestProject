@@ -1,12 +1,15 @@
 package com.stuypulse.robot.subsystems;
 
 import com.stuypulse.robot.constants.Ports;
-import com.stuypulse.stuylib.network.SmartNumber;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-public class ShooterTest {
+public class ShooterTest extends SubsystemBase{
     private final CANSparkMax leftMotor;
     private final CANSparkMax rightMotor;
 
@@ -15,6 +18,9 @@ public class ShooterTest {
     public ShooterTest() {
         leftMotor = new CANSparkMax(Ports.Shooter.LEFT_MOTOR, MotorType.kBrushless);
         rightMotor = new CANSparkMax(Ports.Shooter.RIGHT_MOTOR, MotorType.kBrushless);
+
+        leftEncoder = leftMotor.getEncoder();
+        rightEncoder = rightMotor.getEncoder();
     }
 
     public void setRightVoltage(double voltage) {
@@ -28,5 +34,20 @@ public class ShooterTest {
     public void stop() {
         leftMotor.set(0);
         rightMotor.set(0);
+    }
+
+    public double getRightShooterRPM(){
+        return rightEncoder.getVelocity();
+    }
+    public double getLeftShooterRPM(){
+        return leftEncoder.getVelocity();
+    }
+    
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Shooter/Right RPM", getRightShooterRPM());
+        SmartDashboard.putNumber("Shooter/Left RPM", getLeftShooterRPM());
+        SmartDashboard.putNumber("Shooter/Left Voltage", leftMotor.getBusVoltage() * leftMotor.getAppliedOutput());
+        SmartDashboard.putNumber("Shooter/Right Voltage", rightMotor.getBusVoltage() * rightMotor.getAppliedOutput());
     }
 }

@@ -5,7 +5,10 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.stuypulse.robot.constants.Ports;
 
-public class ClimberTest{
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class ClimberTest extends SubsystemBase{
     private final CANSparkMax leftMotor;
     private final CANSparkMax rightMotor;
     private final RelativeEncoder rightEncoder;
@@ -30,6 +33,21 @@ public class ClimberTest{
         rightMotor.set(0);
     }
 
+    public double getLeftEncoder(){
+        return leftEncoder.getVelocity();
+    }
+
+    public double getRightEncoder(){
+        return rightEncoder.getVelocity();   
+    }
+    
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Climber/Left Voltage", leftMotor.getAppliedOutput() * leftMotor.getBusVoltage());
+        SmartDashboard.putNumber("Climber/Right Voltage", rightMotor.getAppliedOutput() * rightMotor.getBusVoltage());
+        SmartDashboard.putNumber("Climber/Height", getRightEncoder());
+        SmartDashboard.putNumber("Climber/Velocity", getLeftEncoder());
+    }
 }
 
 

@@ -5,8 +5,11 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.stuypulse.robot.constants.Ports;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class AmperTest {
+
+public class AmperTest extends SubsystemBase {
     private final CANSparkMax scoreMotor;
     private final CANSparkMax liftMotor;
     private final RelativeEncoder liftEncoder;
@@ -28,5 +31,15 @@ public class AmperTest {
     public void stop(){
         scoreMotor.set(0);
         liftMotor.set(0);
+    }
+    public double getLiftEncoder() {
+        return liftEncoder.getVelocity();
+    }
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Amper/Intake Speed", scoreMotor.get());
+        SmartDashboard.putNumber("Amper/Lift Speed", liftMotor.get());
+        SmartDashboard.putNumber("Amper/Intake Current", scoreMotor.getOutputCurrent());
+        SmartDashboard.putNumber("Amper/Lift Current", liftMotor.getOutputCurrent());
     }
 }

@@ -4,7 +4,9 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.stuypulse.robot.constants.Ports;
 
-public class IntakeTest {
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class IntakeTest extends SubsystemBase{
     private final CANSparkMax motor;
 
     public IntakeTest() {
@@ -16,6 +18,6 @@ public class IntakeTest {
 
     public void stop() {
         motor.set(0);
-    }
-
+    } 
 }
+
