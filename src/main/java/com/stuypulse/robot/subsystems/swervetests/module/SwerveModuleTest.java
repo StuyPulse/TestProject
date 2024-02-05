@@ -1,13 +1,12 @@
 package com.stuypulse.robot.subsystems.swervetests.module;
 
-import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 
-public class SwerveModuleTest extends SwerveModule{
+public class SwerveModuleTest {
     private final CANSparkMax turnMotor;
     private final CANSparkMax driveMotor;
     private final String id;
@@ -41,7 +40,6 @@ public class SwerveModuleTest extends SwerveModule{
         return turnEncoder.getVelocity().getValueAsDouble();
     }
 
-    @Override
     public String getID(){
         return id;
     }

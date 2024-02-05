@@ -9,7 +9,12 @@ import java.util.function.DoubleConsumer;
 
 import com.stuypulse.robot.commands.auton.DoNothingAuton;
 import com.stuypulse.robot.constants.Ports;
+import com.stuypulse.robot.subsystems.AmperTest;
+import com.stuypulse.robot.subsystems.ClimberTest;
+import com.stuypulse.robot.subsystems.ConveyerTest;
+import com.stuypulse.robot.subsystems.IntakeTest;
 import com.stuypulse.robot.subsystems.ShooterTest;
+import com.stuypulse.robot.subsystems.swervetests.SwerveTest;
 import com.stuypulse.stuylib.input.Gamepad;
 import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
 
@@ -27,7 +32,13 @@ public class RobotContainer {
     
     // Subsystem
     private final ShooterTest shooter = new ShooterTest();
-
+    private final AmperTest amper = new AmperTest();
+    private final SwerveTest swerve = new SwerveTest();
+    private final ClimberTest climber = new ClimberTest();
+    private final ConveyerTest conveyer = new ConveyerTest();
+    private final IntakeTest intake = new IntakeTest();
+    
+    
     // Autons
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
 
@@ -65,6 +76,9 @@ public class RobotContainer {
             .whileTrue(runMotorCommand("Shooter left voltage", shooter::setLeftVoltage, shooter));
     }
 
+
+    
+    
     /**************/
     /*** AUTONS ***/    
     /**************/

@@ -1,8 +1,7 @@
 package com.stuypulse.robot.subsystems.swervetests;
 
 import com.stuypulse.robot.subsystems.swervetests.module.SwerveModuleTest;
-import com.stuypulse.robot.constants.Ports.Swerve.FrontRight;
-import com.stuypulse.robot.subsystems.swervetests.module.SwerveModule;
+
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
