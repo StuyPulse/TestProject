@@ -5,14 +5,19 @@
 
 package com.stuypulse.robot;
 
+import java.util.function.DoubleConsumer;
+
 import com.stuypulse.robot.commands.auton.DoNothingAuton;
 import com.stuypulse.robot.constants.Ports;
+import com.stuypulse.robot.subsystems.ShooterTest;
 import com.stuypulse.stuylib.input.Gamepad;
 import com.stuypulse.stuylib.input.gamepads.AutoGamepad;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.FunctionalCommand;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public class RobotContainer {
 
@@ -21,6 +26,7 @@ public class RobotContainer {
     public final Gamepad operator = new AutoGamepad(Ports.Gamepad.OPERATOR);
     
     // Subsystem
+    private final ShooterTest shooter = new ShooterTest();
 
     // Autons
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -43,7 +49,21 @@ public class RobotContainer {
     /*** BUTTONS ***/
     /***************/
 
-    private void configureButtonBindings() {}
+    private Command runMotorCommand(String name, DoubleConsumer set, Subsystem subsystem) {
+        SmartDashboard.putNumber(name, 6.0);
+
+        return new FunctionalCommand(
+            () -> set.accept(SmartDashboard.getNumber(name, 0.0)),
+            () -> {},
+            (Boolean interrupted) -> set.accept(0.0),
+            () -> false,
+            subsystem);
+    }
+
+    private void configureButtonBindings() {
+        driver.getTopButton()
+            .whileTrue(runMotorCommand("Shooter left voltage", shooter::setLeftVoltage, shooter));
+    }
 
     /**************/
     /*** AUTONS ***/    
