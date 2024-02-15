@@ -72,8 +72,28 @@ public class RobotContainer {
     }
 
     private void configureButtonBindings() {
-        driver.getTopButton()
+        driver.getLeftButton()
             .whileTrue(runMotorCommand("Shooter left voltage", shooter::setLeftVoltage, shooter));
+        driver.getBottomButton()
+            .whileTrue(runMotorCommand("Shooter right voltage", shooter::setRightVoltage, shooter));
+        driver.getTopButton()
+            .whileTrue(runMotorCommand("Amper lift voltage", amper::setLiftVoltage, amper));
+        driver.getRightButton()
+            .whileTrue(runMotorCommand("Amper voltage", amper::setAmperVoltage, amper));
+        driver.getRightBumper()
+            .whileTrue(runMotorCommand("Gandalf voltage", conveyer::setGandalfVoltage, conveyer));
+        driver.getRightTriggerButton()
+            .whileTrue(runMotorCommand("Conveyor shooter feeder voltage", conveyer::setShooterFeederVoltage, conveyer));
+        driver.getStartButton()
+            .whileTrue(runMotorCommand("Intake voltage", intake::setIntakeVoltage, intake));
+        driver.getDPadLeft()
+            .whileTrue(runMotorCommand("Swerve turn voltage", swerve::setTurnVoltage, swerve));
+        driver.getDPadDown()
+            .whileTrue(runMotorCommand("Swerve drive voltage", swerve::setDriveVoltage, swerve));
+        driver.getDPadUp()
+            .whileTrue(runMotorCommand("Climber left voltage", climber::setLeftVoltage, swerve));
+        driver.getDPadRight()
+            .whileTrue(runMotorCommand("Climber right voltage", climber::setRightVoltage, climber));
     }
 
 
