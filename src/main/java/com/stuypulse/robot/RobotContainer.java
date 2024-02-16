@@ -38,7 +38,6 @@ public class RobotContainer {
     private final ConveyerTest conveyer = new ConveyerTest();
     private final IntakeTest intake = new IntakeTest();
     
-    
     // Autons
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
 

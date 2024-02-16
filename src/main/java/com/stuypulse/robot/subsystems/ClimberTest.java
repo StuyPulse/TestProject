@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.stuypulse.robot.constants.Ports;
+import com.stuypulse.robot.constants.Settings;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,6 +21,13 @@ public class ClimberTest extends SubsystemBase{
 
         rightEncoder = rightMotor.getEncoder();
         leftEncoder = leftMotor.getEncoder();
+
+        rightEncoder.setPositionConversionFactor(Settings.ClimberTest.Encoder.POSITION_CONVERSION);
+        leftEncoder.setPositionConversionFactor(Settings.ClimberTest.Encoder.POSITION_CONVERSION);
+
+        rightEncoder.setVelocityConversionFactor(Settings.ClimberTest.Encoder.VELOCITY_CONVERSION);
+        leftEncoder.setVelocityConversionFactor(Settings.ClimberTest.Encoder.VELOCITY_CONVERSION);
+
     }
     public void setLeftVoltage(double voltage){
         leftMotor.set(voltage);
@@ -33,20 +41,29 @@ public class ClimberTest extends SubsystemBase{
         rightMotor.set(0);
     }
 
-    public double getLeftEncoder(){
+    public double getLeftVelocity() {
         return leftEncoder.getVelocity();
     }
+    public double getLeftPosition() {
+        return leftEncoder.getPosition();
+    }
 
-    public double getRightEncoder(){
+    public double getRightVelocity() {
         return rightEncoder.getVelocity();   
+    }
+
+    public double getRightPosition() {
+        return rightEncoder.getPosition();
     }
     
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Climber/Left Voltage", leftMotor.getAppliedOutput() * leftMotor.getBusVoltage());
         SmartDashboard.putNumber("Climber/Right Voltage", rightMotor.getAppliedOutput() * rightMotor.getBusVoltage());
-        SmartDashboard.putNumber("Climber/Height", getRightEncoder());
-        SmartDashboard.putNumber("Climber/Velocity", getLeftEncoder());
+        SmartDashboard.putNumber("Climber/Right Height", getRightPosition());
+        SmartDashboard.putNumber("Climber/Right Velocity", getRightVelocity());
+        SmartDashboard.putNumber("Climber/Left Position", getLeftPosition());
+        SmartDashboard.putNumber("Climber/Left Velocity", getLeftVelocity());
     }
 }
 
