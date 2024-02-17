@@ -3,6 +3,7 @@ package com.stuypulse.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.stuypulse.robot.constants.Motors;
 import com.stuypulse.robot.constants.Ports;
 import com.stuypulse.robot.constants.Settings;
 
@@ -27,6 +28,9 @@ public class ClimberTest extends SubsystemBase{
 
         rightEncoder.setVelocityConversionFactor(Settings.ClimberTest.Encoder.VELOCITY_CONVERSION);
         leftEncoder.setVelocityConversionFactor(Settings.ClimberTest.Encoder.VELOCITY_CONVERSION);
+
+        // Motors.Climber.LEFT_MOTOR.configure(leftMotor);
+        // Motors.Climber.RIGHT_MOTOR.configure(rightMotor);
 
     }
     public void setLeftVoltage(double voltage){

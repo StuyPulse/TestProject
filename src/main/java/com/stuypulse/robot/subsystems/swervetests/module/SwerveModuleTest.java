@@ -4,6 +4,7 @@ import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.stuypulse.robot.constants.Motors;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 
@@ -23,6 +24,9 @@ public class SwerveModuleTest {
         turnEncoder = new CANcoder(encoderID);
 
         this.id = id;
+
+        // Motors.Swerve.DRIVE_CONFIG.configure(driveMotor);
+        // Motors.Swerve.TURN_CONFIG.configure(turnMotor);
     } 
 
     public void setTurnMotor(double voltage){
